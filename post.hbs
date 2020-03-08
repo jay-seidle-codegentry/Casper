@@ -41,7 +41,11 @@ into the {body} of the default.hbs template --}}
 
                                 <div class="author-card">
                                     {{#if profile_image}}
-                                    <img class="author-profile-image" src="{{img_url profile_image size="xs"}}" alt="{{name}}" />
+                                        {{#if @cookies.wpcc}}
+                                        <img class="author-profile-image" src="{{img_url profile_image size="xs"}}" alt="{{name}}" />
+                                        {{else}}
+                                        <div class="author-profile-image">{{> "icons/avatar"}}</div>
+                                        {{/if}}
                                     {{else}}
                                     <div class="author-profile-image">{{> "icons/avatar"}}</div>
                                     {{/if}}
@@ -61,7 +65,11 @@ into the {body} of the default.hbs template --}}
 
                                 {{#if profile_image}}
                                 <a href="{{url}}" class="author-avatar">
+                                    {{#if @cookies.wpcc}}
                                     <img class="author-profile-image" src="{{img_url profile_image size="xs"}}" alt="{{name}}" />
+                                    {{else}}
+                                    <a href="{{url}}" class="author-avatar author-profile-image">{{> "icons/avatar"}}</a>
+                                    {{/if}}
                                 </a>
                                 {{else}}
                                 <a href="{{url}}" class="author-avatar author-profile-image">{{> "icons/avatar"}}</a>
@@ -86,6 +94,7 @@ into the {body} of the default.hbs template --}}
             </header>
 
             {{#if feature_image}}
+            {{#if @cookies.wpcc}}
             <figure class="post-full-image">
                 {{!-- This is a responsive image, it loads different sizes depending on device
                 https://medium.freecodecamp.org/a-guide-to-responsive-images-with-ready-to-use-templates-c400bd65c433 --}}
@@ -102,6 +111,7 @@ into the {body} of the default.hbs template --}}
                 />
             </figure>
             {{/if}}
+            {{/if}}
 
             <section class="post-full-content">
                 <div class="post-content">
@@ -116,8 +126,10 @@ into the {body} of the default.hbs template --}}
 
             
             <section class="post-full-comments">
+                {{#if @cookies.wpcc}}
                 <div id="commento"></div>
                 <script src="https://cdn.commento.io/js/commento.js"></script>
+                {{/if}}
             </section>
             
 
